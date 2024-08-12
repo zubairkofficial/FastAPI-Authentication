@@ -5,7 +5,7 @@ from app.models.User import User
 from app.models.PasswordReset import PasswordReset
 from app.routes.user_route import router as user_router
 import logging
-
+from fastapi.middleware.cors import CORSMiddleware
 
 
 def create_table():
@@ -22,7 +22,15 @@ async def lifespan(app= FastAPI):
     yield
         
 app = FastAPI(lifespan=lifespan)
-app.include_router(user_router, prefix='/auth', tags=['User'])
+app.include_router(user_router, prefix='/api/auth', tags=['User'])
+
+app.add_middleware(
+    CORSMiddleware, 
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get('/')
 def index():

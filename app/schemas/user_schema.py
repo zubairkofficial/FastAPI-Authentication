@@ -3,15 +3,13 @@ from pydantic import BaseModel, EmailStr
 
 class BaseUser(BaseModel):
     id: int
-    firstName: str
-    lastName: str
+    name: str
     email: EmailStr
     password: str
 
 
 class RegisterUser(BaseModel):
-    firstName: str
-    lastName: str
+    name: str
     email: EmailStr
     password: str
 

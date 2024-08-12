@@ -34,7 +34,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 def get_current_user(token:str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not valid Credentails", headers={"WWW-Authenticate": "Bearer"}
+        status_code=status.HTTP_401_UNAUTHORIZED, messsage="Could not valid Credentails", headers={"WWW-Authenticate": "Bearer"}
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
@@ -52,6 +52,6 @@ def get_current_user(token:str = Depends(oauth2_scheme), db: Session = Depends(g
     
 
 def get_current_active_user(current_user: User = Depends(get_current_user)):
-    if current_user.is_active == False:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Inactive user")
+    if current_user.email_verified_at:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, messsage="User not Verified")
     return current_user
