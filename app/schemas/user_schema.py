@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class BaseUser(BaseModel):
@@ -9,8 +9,8 @@ class BaseUser(BaseModel):
 
 
 class RegisterUser(BaseModel):
-    name: str
-    email: EmailStr
+    name: str = Field(min_length=3, max_length=255)
+    email: EmailStr = Field(min_length=3, max_length=255)
     password: str
 
 

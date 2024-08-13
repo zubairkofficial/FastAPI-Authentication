@@ -22,7 +22,7 @@ async def register(user: RegisterUser, db: Session = Depends(get_db)):
     hash_password = hashed_password(user.password)
     db_user = db.query(User).filter(User.email == user.email).first()
     if db_user:
-        raise HTTPException(status_code=status.HTTP_302_FOUND, messsage="Email Already Exists")
+        return {'status':'error', 'message':"Email Already Exists"}
     
     new_user = User(name=user.name, email=user.email, password=hash_password)
     db.add(new_user)
