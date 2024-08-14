@@ -2,6 +2,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+
 def send_verification_email(email: str, activation_link: str):
     smtp_server = "smtp.hostinger.com"
     smtp_port = 465  # SSL port
@@ -39,7 +40,6 @@ def send_verification_email(email: str, activation_link: str):
         print(f"Failed to send email: {e}")
 
 
-
 def send_reset_password(email: str, random_password):
     smtp_server = "smtp.hostinger.com"
     smtp_port = 465  # SSL port
@@ -51,8 +51,6 @@ def send_reset_password(email: str, random_password):
     message["From"] = "\"Authentication\" <info@cyberifyportfolio.com>"
     message["To"] = email
     message["Subject"] = "Password Reset Request"
-
-    
 
     # Create HTML email body
     html = f"""\
