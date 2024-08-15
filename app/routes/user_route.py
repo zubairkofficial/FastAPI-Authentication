@@ -93,6 +93,7 @@ async def login(user: LoginUser, db: Session = Depends(get_db)):
             id=db_user.id,
             name=db_user.name,
             email=db_user.email,
+            user_type=db_user.user_type,
             created_at=db_user.created_at,
             updated_at=db_user.updated_at
         )

@@ -13,6 +13,7 @@ class UserResponse(BaseModel):
     id: int
     name: str
     email: str
+    user_type: int
     created_at: datetime
     updated_at: datetime
 
